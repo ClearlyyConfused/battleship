@@ -8,44 +8,73 @@ class GameBoard {
 			['', '', '', '', '', ''],
 			['', '', '', '', '', ''],
 		];
+		this.gameStatus = true;
 	}
 
-	occupySpot(row, col) {
-		this.boardArray[row][col] = 'x';
-	}
-
-	addShipH(length, row, col) {
-		let x = 0;
-		while (x < length) {
-			if (this.boardArray[row][col + x] === '') {
-			} else {
-				return 'Error, cannot place here!';
+	addShip(length, row, col, orientation) {
+		if (orientation === 'h') {
+			let x = 0;
+			while (x < length) {
+				if (this.boardArray[row][col + x] === '') {
+				} else {
+					return 'Error, cannot place here!';
+				}
+				x += 1;
 			}
-			x += 1;
-		}
 
-		x = 0;
-		while (x < length) {
-			this.boardArray[row][col + x] = 'x';
-			x += 1;
+			x = 0;
+			while (x < length) {
+				this.boardArray[row][col + x] = 'o';
+				x += 1;
+			}
+		}
+		if (orientation === 'v') {
+			let x = 0;
+			while (x < length) {
+				if (this.boardArray[row + x][col] === '') {
+				} else {
+					return 'Error, cannot place here!';
+				}
+				x += 1;
+			}
+
+			x = 0;
+			while (x < length) {
+				this.boardArray[row + x][col] = 'o';
+				x += 1;
+			}
 		}
 	}
 
-	addShipV(length, row, col) {
-		let x = 0;
-		while (x < length) {
-			if (this.boardArray[row + x][col] === '') {
-			} else {
-				return 'Error, cannot place here!';
-			}
-			x += 1;
+	fireAt(row, col) {
+		if (this.boardArray[row][col] === 'o') {
+			this.boardArray[row][col] = 'x';
+		} else {
+			this.boardArray[row][col] = 'm';
 		}
+		this.checkWin();
+	}
 
-		x = 0;
-		while (x < length) {
-			this.boardArray[row + x][col] = 'x';
-			x += 1;
+	checkWin() {
+		for (const row of this.boardArray) {
+			for (const spot of row) {
+				if (spot === 'o') {
+					return;
+				}
+			}
 		}
+		this.gameStatus = false;
+	}
+
+	resetBoard() {
+		this.boardArray = [
+			['', '', '', '', '', ''],
+			['', '', '', '', '', ''],
+			['', '', '', '', '', ''],
+			['', '', '', '', '', ''],
+			['', '', '', '', '', ''],
+			['', '', '', '', '', ''],
+		];
 	}
 }
 
