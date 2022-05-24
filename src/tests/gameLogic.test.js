@@ -72,19 +72,51 @@ test('Resetting a game returns 2 empty boards', () => {
 	]);
 });
 
-test('Game will add ships at the correct spots in the correct game board', () => {
+test('Game will add correct ships at the correct spots in the correct game board', () => {
 	const game = new Game();
-	let x = 0;
 	let row = '0';
 	let col = '0';
 	let orientation = 'v';
 
-	game.player1Board.addShip(x + 3, row, col, orientation);
+	game.addShipsP1(row, col, orientation);
 	expect(game.player1Board.boardArray).toEqual([
 		['o', '', '', '', '', ''],
 		['o', '', '', '', '', ''],
 		['o', '', '', '', '', ''],
 		['', '', '', '', '', ''],
+		['', '', '', '', '', ''],
+		['', '', '', '', '', ''],
+	]);
+
+	row = 0;
+	col = 1;
+	game.addShipsP1(row, col, orientation);
+	expect(game.player1Board.boardArray).toEqual([
+		['o', 'o', '', '', '', ''],
+		['o', 'o', '', '', '', ''],
+		['o', 'o', '', '', '', ''],
+		['', 'o', '', '', '', ''],
+		['', '', '', '', '', ''],
+		['', '', '', '', '', ''],
+	]);
+});
+
+test('Game will not add a ship if the space is already occupied', () => {
+	const game = new Game();
+	let row = '0';
+	let col = '0';
+	let orientation = 'v';
+
+	game.addShipsP1(row, col, orientation);
+	expect(game.addShipsP1(row, col, orientation)).toBe(undefined);
+	game.addShipsP1(row + 2, col, orientation);
+	game.addShipsP1(row, col + 1, orientation);
+
+	expect(game.player1Board.boardArray).toEqual([
+		['o', 'o', '', '', '', ''],
+		['o', 'o', '', '', '', ''],
+		['o', 'o', '', '', '', ''],
+		['', 'o', '', '', '', ''],
 		['', '', '', '', '', ''],
 		['', '', '', '', '', ''],
 	]);

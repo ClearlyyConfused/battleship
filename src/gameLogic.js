@@ -5,50 +5,61 @@ class Game {
 		this.player1Board = new GameBoard();
 		this.player2Board = new GameBoard();
 		this.turn = 0;
+		this.ship1 = [false, false];
+		this.ship2 = [false, false];
+		this.ship3 = [false, false];
 	}
 
-	startGame(prompt) {
-		let x = 0;
+	startGame() {
 		this.turn = 0;
 		this.player1Board.gameStatus = true;
 		this.player2Board.gameStatus = true;
+		this.ship1 = [false, false];
+		this.ship2 = [false, false];
+		this.ship3 = [false, false];
+	}
 
-		while (x < 3) {
-			let row = prompt('What is the row?');
-			let col = prompt('What is a column?');
-			let orientation = prompt('What is a orientation?');
-
-			if (
-				this.player1Board.addShip(x + 3, row, col, orientation) ===
-				'Error, cannot place here!'
-			) {
-				alert('Error, cannot place here!');
-				x -= 1;
-			} else {
-				this.player1Board.addShip(x + 3, row, col, orientation);
-			}
-
-			x += 1;
+	addShipsP1(row, col, orientation) {
+		let length = 3;
+		if (
+			this.player2Board.addShip(length, row, col, orientation) ===
+			'Error, cannot place here!'
+		) {
+			console.log('Error, cannot place here!');
+			return;
 		}
-		x = 0;
-		while (x < 3) {
-			let row = prompt('What is the row?');
-			let col = prompt('What is a column?');
-			let orientation = prompt('What is the orientation?');
-
-			if (
-				this.player2Board.addShip(x + 3, row, col, orientation) ===
-				'Error, cannot place here!'
-			) {
-				alert('Error, cannot place here!');
-				x -= 1;
-			} else {
-				this.player2Board.addShip(x + 3, row, col, orientation);
-			}
-
-			x += 1;
+		if (this.ship1[0] === false) {
+			this.player1Board.addShip(length, row, col, orientation);
+			this.ship1[0] = true;
+		} else if (this.ship2[0] === false) {
+			this.player1Board.addShip(length + 1, row, col, orientation);
+			this.ship2[0] = true;
+		} else if (this.ship3[0] === false) {
+			this.player1Board.addShip(length + 2, row, col, orientation);
+			this.ship3[0] = true;
 		}
 		console.log(this.player1Board.boardArray);
+	}
+
+	addShipsP2(row, col, orientation) {
+		let length = 3;
+		if (
+			this.player2Board.addShip(length, row, col, orientation) ===
+			'Error, cannot place here!'
+		) {
+			console.log('Error, cannot place here!');
+			return;
+		}
+		if (this.ship1[1] === false) {
+			this.player2Board.addShip(length, row, col, orientation);
+			this.ship1[1] = true;
+		} else if (this.ship2 === false) {
+			this.player2Board.addShip(length + 1, row, col, orientation);
+			this.ship2[1] = true;
+		} else if (this.ship3 === false) {
+			this.player2Board.addShip(length + 2, row, col, orientation);
+			this.ship3[1] = true;
+		}
 		console.log(this.player2Board.boardArray);
 	}
 
