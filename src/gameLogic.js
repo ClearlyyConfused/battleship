@@ -18,7 +18,16 @@ class Game {
 			let col = prompt('What is a column?');
 			let orientation = prompt('What is a orientation?');
 
-			this.player1Board.addShip(x + 3, row, col, orientation);
+			if (
+				this.player1Board.addShip(x + 3, row, col, orientation) ===
+				'Error, cannot place here!'
+			) {
+				alert('Error, cannot place here!');
+				x -= 1;
+			} else {
+				this.player1Board.addShip(x + 3, row, col, orientation);
+			}
+
 			x += 1;
 		}
 		x = 0;
@@ -27,9 +36,20 @@ class Game {
 			let col = prompt('What is a column?');
 			let orientation = prompt('What is the orientation?');
 
-			this.player2Board.addShip(x + 3, row, col, orientation);
+			if (
+				this.player1Board.addShip(x + 3, row, col, orientation) ===
+				'Error, cannot place here!'
+			) {
+				alert('Error, cannot place here!');
+				x -= 1;
+			} else {
+				this.player1Board.addShip(x + 3, row, col, orientation);
+			}
+
 			x += 1;
 		}
+		console.log(this.player1Board);
+		console.log(this.player2Board);
 	}
 
 	playRound(prompt) {

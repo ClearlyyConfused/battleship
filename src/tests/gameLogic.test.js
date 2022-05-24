@@ -80,7 +80,6 @@ test('Game will add ships at the correct spots in the correct game board', () =>
 	let orientation = 'v';
 
 	game.player1Board.addShip(x + 3, row, col, orientation);
-
 	expect(game.player1Board.boardArray).toEqual([
 		['o', '', '', '', '', ''],
 		['o', '', '', '', '', ''],
@@ -114,7 +113,6 @@ test('Game will fire at correct spots in the specified board', () => {
 	let col;
 	row = '0';
 	col = '1';
-
 	game.player1Board.fireAt(row, col);
 	expect(game.player1Board.boardArray).toEqual([
 		['', 'x', '', '', '', ''],
