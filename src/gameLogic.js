@@ -4,39 +4,42 @@ class Game {
 	constructor() {
 		this.player1Board = new GameBoard();
 		this.player2Board = new GameBoard();
+		this.turn = 0;
 	}
 
-	startGame() {
+	startGame(prompt) {
 		let x = 0;
-		while (x < 2) {
+		this.turn = 0;
+		this.player1Board.gameStatus = true;
+		this.player2Board.gameStatus = true;
+
+		while (x < 3) {
 			let row = prompt('What is the row?');
 			let col = prompt('What is a column?');
 			let orientation = prompt('What is a orientation?');
 
-			this.player1Board.addShip(x, row, col, orientation);
+			this.player1Board.addShip(x + 3, row, col, orientation);
 			x += 1;
 		}
 		x = 0;
-		while (x < 2) {
+		while (x < 3) {
 			let row = prompt('What is the row?');
 			let col = prompt('What is a column?');
-			let orientation = prompt('What is a orientation?');
+			let orientation = prompt('What is the orientation?');
 
-			this.player2Board.addShip(x, row, col, orientation);
+			this.player2Board.addShip(x + 3, row, col, orientation);
 			x += 1;
 		}
-		this.gameState();
 	}
 
-	gameState() {
-		let x = 0;
+	playRound(prompt) {
 		let row;
 		let col;
 		while (
-			this.player1Board.gameStatus !== 'false' ||
-			this.player2Board.gameStatus !== 'false'
+			this.player1Board.gameStatus === true &&
+			this.player2Board.gameStatus === true
 		) {
-			if (x % 2 === 0) {
+			if (this.turn % 2 === 0) {
 				row = prompt('What is the row?');
 				col = prompt('What is a column?');
 				this.player1Board.fireAt(row, col);
@@ -45,7 +48,10 @@ class Game {
 				col = prompt('What is a column?');
 				this.player2Board.fireAt(row, col);
 			}
+			this.turn += 1;
+			return 'Round is played';
 		}
+		return 'Game is Over';
 	}
 
 	resetGame() {

@@ -12,6 +12,9 @@ class GameBoard {
 	}
 
 	addShip(length, row, col, orientation) {
+		row = parseInt(row);
+		col = parseInt(col);
+
 		if (orientation === 'h') {
 			let x = 0;
 			while (x < length) {
