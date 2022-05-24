@@ -66,6 +66,7 @@ class GameBoard {
 				}
 			}
 		}
+		console.log('Game Over!');
 		this.gameStatus = false;
 	}
 

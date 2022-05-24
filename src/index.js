@@ -1,5 +1,5 @@
 import { Game } from './gameLogic';
-import { createBoardDisplay } from './gameDisplay';
+import { createBoardDisplay, fireAtP1, fireAtP2 } from './gameDisplay';
 
 const game = new Game();
 
@@ -11,5 +11,6 @@ createBoardDisplay(game, 'boardDisplay1');
 createBoardDisplay(game, 'boardDisplay2');
 
 document.querySelector('#fireAt').addEventListener('click', () => {
-	game.playRound(prompt);
+	fireAtP1(game);
+	fireAtP2(game);
 });

@@ -96,4 +96,48 @@ function displayShipsP2(game) {
 	}
 }
 
-export { createBoardDisplay };
+function fireAtP1(game) {
+	let x = 0;
+	let y = 0;
+
+	while (x < 6) {
+		y = 0;
+		while (y < 6) {
+			let spots = document.querySelectorAll(`#boardDisplay1 .row${x} .column${y}`);
+			for (const spot of spots) {
+				let px = x;
+				let py = y;
+				spot.addEventListener('click', () => {
+					game.player1Board.fireAt(px, py);
+					displayShipsP1(game);
+				});
+			}
+			y += 1;
+		}
+		x += 1;
+	}
+}
+
+function fireAtP2(game) {
+	let x = 0;
+	let y = 0;
+
+	while (x < 6) {
+		y = 0;
+		while (y < 6) {
+			let spots = document.querySelectorAll(`#boardDisplay2 .row${x} .column${y}`);
+			for (const spot of spots) {
+				let px = x;
+				let py = y;
+				spot.addEventListener('click', () => {
+					game.player2Board.fireAt(px, py);
+					displayShipsP2(game);
+				});
+			}
+			y += 1;
+		}
+		x += 1;
+	}
+}
+
+export { createBoardDisplay, fireAtP1, fireAtP2 };
