@@ -52,7 +52,7 @@ class GameBoard {
 	fireAt(row, col) {
 		if (this.boardArray[row][col] === 'o') {
 			this.boardArray[row][col] = 'x';
-		} else {
+		} else if (this.boardArray[row][col] === '') {
 			this.boardArray[row][col] = 'm';
 		}
 		this.checkWin();
