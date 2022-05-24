@@ -1,4 +1,4 @@
-import { GameBoard } from './gameBoardLogic';
+import { GameBoard } from '../gameBoardLogic';
 
 test('Able to add ships on game board using cords (row, col)', () => {
 	let gameboard = new GameBoard();

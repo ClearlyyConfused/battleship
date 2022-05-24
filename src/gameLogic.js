@@ -8,21 +8,21 @@ class Game {
 
 	startGame() {
 		let x = 0;
-		while (x < 3) {
+		while (x < 2) {
 			let row = prompt('What is the row?');
 			let col = prompt('What is a column?');
 			let orientation = prompt('What is a orientation?');
 
-			this.addShip(this.player1Board, x + 2, row, col, orientation);
+			this.player1Board.addShip(x, row, col, orientation);
 			x += 1;
 		}
 		x = 0;
-		while (x < 3) {
+		while (x < 2) {
 			let row = prompt('What is the row?');
 			let col = prompt('What is a column?');
 			let orientation = prompt('What is a orientation?');
 
-			this.addShip(this.player2Board, x + 2, row, col, orientation);
+			this.player2Board.addShip(x, row, col, orientation);
 			x += 1;
 		}
 		this.gameState();
@@ -51,10 +51,6 @@ class Game {
 	resetGame() {
 		this.player1Board.resetBoard();
 		this.player2Board.resetBoard();
-	}
-
-	addShip(board, length, row, col, orientation) {
-		board.addShip(length, row, col, orientation);
 	}
 }
 

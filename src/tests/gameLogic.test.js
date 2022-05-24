@@ -1,4 +1,4 @@
-import { Game } from './gameLogic';
+import { Game } from '../gameLogic';
 
 test('Creating a new game creates 2 empty boards', () => {
 	const game = new Game();

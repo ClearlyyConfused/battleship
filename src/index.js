@@ -1,9 +1,4 @@
-import { Ship } from './shipLogic';
+import { Game } from './gameLogic';
 
-const ship1 = new Ship(2);
-ship1.hitShip(0);
-console.log(ship1.shipArray);
-console.log(ship1.shipSunk);
-ship1.hitShip(1);
-console.log(ship1.shipArray);
-console.log(ship1.shipSunk);
+const game = new Game();
+game.startGame();

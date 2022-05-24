@@ -1,4 +1,4 @@
-import { Ship } from './shipLogic';
+import { Ship } from '../shipLogic';
 
 test('Create 2 ships one with length 7 and one with length 14', () => {
 	let ship1 = new Ship(7);
