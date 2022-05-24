@@ -21,13 +21,16 @@ class Game {
 
 	addShipsP1(row, col, orientation) {
 		let length = 3;
-		if (
-			this.player2Board.addShip(length, row, col, orientation) ===
-			'Error, cannot place here!'
-		) {
-			console.log('Error, cannot place here!');
-			return;
+		let x = 0;
+
+		while (x < length) {
+			if (this.player1Board.boardArray[parseInt(row)][parseInt(col) + x] === '') {
+			} else {
+				return;
+			}
+			x += 1;
 		}
+
 		if (this.ship1[0] === false) {
 			this.player1Board.addShip(length, row, col, orientation);
 			this.ship1[0] = true;
@@ -38,28 +41,33 @@ class Game {
 			this.player1Board.addShip(length + 2, row, col, orientation);
 			this.ship3[0] = true;
 		}
+		console.log('board1:');
 		console.log(this.player1Board.boardArray);
 	}
 
 	addShipsP2(row, col, orientation) {
 		let length = 3;
-		if (
-			this.player2Board.addShip(length, row, col, orientation) ===
-			'Error, cannot place here!'
-		) {
-			console.log('Error, cannot place here!');
-			return;
+		let x = 0;
+
+		while (x < length) {
+			if (this.player2Board.boardArray[parseInt(row)][parseInt(col) + x] === '') {
+			} else {
+				return;
+			}
+			x += 1;
 		}
+
 		if (this.ship1[1] === false) {
 			this.player2Board.addShip(length, row, col, orientation);
 			this.ship1[1] = true;
-		} else if (this.ship2 === false) {
+		} else if (this.ship2[1] === false) {
 			this.player2Board.addShip(length + 1, row, col, orientation);
 			this.ship2[1] = true;
-		} else if (this.ship3 === false) {
+		} else if (this.ship3[1] === false) {
 			this.player2Board.addShip(length + 2, row, col, orientation);
 			this.ship3[1] = true;
 		}
+		console.log('board2:');
 		console.log(this.player2Board.boardArray);
 	}
 

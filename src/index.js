@@ -7,8 +7,8 @@ document.querySelector('#startGame').addEventListener('click', () => {
 	game.startGame(prompt);
 });
 
-createBoardDisplay('boardDisplay1');
-createBoardDisplay('boardDisplay2');
+createBoardDisplay(game, 'boardDisplay1');
+createBoardDisplay(game, 'boardDisplay2');
 
 document.querySelector('#fireAt').addEventListener('click', () => {
 	game.playRound(prompt);
