@@ -24,8 +24,9 @@ class Game {
 		let x = 0;
 
 		while (x < length) {
-			if (this.player1Board.boardArray[parseInt(row)][parseInt(col) + x] === '') {
+			if (this.player1Board.boardArray[parseInt(row) + x][parseInt(col)] === '') {
 			} else {
+				console.log('error cannot place here');
 				return;
 			}
 			x += 1;
@@ -50,7 +51,7 @@ class Game {
 		let x = 0;
 
 		while (x < length) {
-			if (this.player2Board.boardArray[parseInt(row)][parseInt(col) + x] === '') {
+			if (this.player2Board.boardArray[parseInt(row) + x][parseInt(col)] === '') {
 			} else {
 				return;
 			}
