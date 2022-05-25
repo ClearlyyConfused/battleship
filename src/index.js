@@ -5,10 +5,9 @@ const game = new Game();
 
 document.querySelector('#startGame').addEventListener('click', () => {
 	game.startGame(prompt);
+	createBoardDisplay(game, 'boardDisplay1');
+	createBoardDisplay(game, 'boardDisplay2');
 });
-
-createBoardDisplay(game, 'boardDisplay1');
-createBoardDisplay(game, 'boardDisplay2');
 
 document.querySelector('#fireAt').addEventListener('click', () => {
 	fireAtP1(game);

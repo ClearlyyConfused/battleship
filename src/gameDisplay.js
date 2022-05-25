@@ -7,10 +7,12 @@ function createRowP1(game) {
 		column.setAttribute('class', `column${x}`);
 
 		column.addEventListener('click', () => {
-			let col = column.className.slice(-1);
-			let row = column.parentNode.className.slice(-1);
-			game.addShipsP1(row, col, 'v');
-			displayShipsP1(game);
+			if (game.fireMode === false) {
+				let col = column.className.slice(-1);
+				let row = column.parentNode.className.slice(-1);
+				game.addShipsP1(row, col, 'v');
+				displayShipsP1(game);
+			}
 		});
 
 		row.appendChild(column);
@@ -28,10 +30,12 @@ function createRowP2(game) {
 		column.setAttribute('class', `column${x}`);
 
 		column.addEventListener('click', () => {
-			let col = column.className.slice(-1);
-			let row = column.parentNode.className.slice(-1);
-			game.addShipsP2(row, col, 'v');
-			displayShipsP2(game);
+			if (game.fireMode === false) {
+				let col = column.className.slice(-1);
+				let row = column.parentNode.className.slice(-1);
+				game.addShipsP2(row, col, 'v');
+				displayShipsP2(game);
+			}
 		});
 
 		row.appendChild(column);
@@ -97,6 +101,7 @@ function displayShipsP2(game) {
 }
 
 function fireAtP1(game) {
+	game.fireMode = true;
 	let x = 0;
 	let y = 0;
 
@@ -108,8 +113,13 @@ function fireAtP1(game) {
 				let px = x;
 				let py = y;
 				spot.addEventListener('click', () => {
-					game.player1Board.fireAt(px, py);
-					displayShipsP1(game);
+					if (
+						game.player1Board.gameStatus === true &&
+						game.player2Board.gameStatus === true
+					) {
+						game.player1Board.fireAt(px, py);
+						displayShipsP1(game);
+					}
 				});
 			}
 			y += 1;
@@ -119,6 +129,7 @@ function fireAtP1(game) {
 }
 
 function fireAtP2(game) {
+	game.fireMode = true;
 	let x = 0;
 	let y = 0;
 
@@ -130,8 +141,13 @@ function fireAtP2(game) {
 				let px = x;
 				let py = y;
 				spot.addEventListener('click', () => {
-					game.player2Board.fireAt(px, py);
-					displayShipsP2(game);
+					if (
+						game.player1Board.gameStatus === true &&
+						game.player2Board.gameStatus === true
+					) {
+						game.player2Board.fireAt(px, py);
+						displayShipsP2(game);
+					}
 				});
 			}
 			y += 1;

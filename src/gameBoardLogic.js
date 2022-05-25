@@ -50,12 +50,14 @@ class GameBoard {
 	}
 
 	fireAt(row, col) {
-		if (this.boardArray[row][col] === 'o') {
-			this.boardArray[row][col] = 'x';
-		} else if (this.boardArray[row][col] === '') {
-			this.boardArray[row][col] = 'm';
+		if (this.gameStatus === true) {
+			if (this.boardArray[row][col] === 'o') {
+				this.boardArray[row][col] = 'x';
+			} else if (this.boardArray[row][col] === '') {
+				this.boardArray[row][col] = 'm';
+			}
+			this.checkWin();
 		}
-		this.checkWin();
 	}
 
 	checkWin() {

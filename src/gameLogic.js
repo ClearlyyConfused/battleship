@@ -8,6 +8,7 @@ class Game {
 		this.ship1 = [false, false];
 		this.ship2 = [false, false];
 		this.ship3 = [false, false];
+		this.fireMode = false;
 	}
 
 	startGame() {
@@ -17,6 +18,7 @@ class Game {
 		this.ship1 = [false, false];
 		this.ship2 = [false, false];
 		this.ship3 = [false, false];
+		this.fireMode = false;
 	}
 
 	addShipsP1(row, col, orientation) {
