@@ -76,7 +76,14 @@ function displayShips(player, playerBoard) {
 				`#boardDisplay${player + 1} .row${x} .column${y}`
 			);
 			for (const spot of spots) {
-				spot.innerText = playerBoard[x][y];
+				spot.innerText = '';
+				if (player === 0) {
+					spot.innerText = playerBoard[x][y];
+				} else {
+					if (playerBoard[x][y] !== 'o') {
+						spot.innerText = playerBoard[x][y];
+					}
+				}
 			}
 			y += 1;
 		}
@@ -123,4 +130,4 @@ function fireAt(game, board, px, py, player) {
 	}
 }
 
-export { createBoardDisplay, beginFireMode, removeDisplay };
+export { createBoardDisplay, beginFireMode, removeDisplay, displayShips };

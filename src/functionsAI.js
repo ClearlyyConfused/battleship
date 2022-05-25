@@ -1,3 +1,5 @@
+import { displayShips } from './gameDisplay';
+
 function createBoardDisplayAI(game, board) {
 	let x = 0;
 
@@ -59,7 +61,7 @@ function addShipsAI(game, player, playerBoard) {
 	}
 }
 
-function displayShips(player, playerBoard) {
+function displayShipsAI(player, playerBoard) {
 	let x = 0;
 	let y = 0;
 
@@ -78,4 +80,4 @@ function displayShips(player, playerBoard) {
 	}
 }
 
-export { createBoardDisplayAI };
+export { createBoardDisplayAI, displayShipsAI };
