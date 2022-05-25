@@ -32,7 +32,7 @@ test('Starting a new game resets game board statuses', () => {
 	expect(game.player1Board.gameStatus).toBe(true);
 });
 
-test('Resetting a game returns 2 empty boards', () => {
+test('Starting a new game returns 2 empty boards', () => {
 	const game = new Game();
 	game.player1Board.boardArray = [
 		['', 'o', '', '', '', ''],
@@ -51,7 +51,7 @@ test('Resetting a game returns 2 empty boards', () => {
 		['', 'o', 'x', 'o', '', ''],
 	];
 
-	game.resetGame();
+	game.startGame();
 
 	expect(game.player1Board.boardArray).toEqual([
 		['', '', '', '', '', ''],
@@ -78,7 +78,7 @@ test('Game will add correct ships at the correct spots in the correct game board
 	let col = '0';
 	let orientation = 'v';
 
-	game.addShipsP1(row, col, orientation);
+	game.addShips(row, col, orientation, 0);
 	expect(game.player1Board.boardArray).toEqual([
 		['o', '', '', '', '', ''],
 		['o', '', '', '', '', ''],
@@ -90,7 +90,7 @@ test('Game will add correct ships at the correct spots in the correct game board
 
 	row = 0;
 	col = 1;
-	game.addShipsP1(row, col, orientation);
+	game.addShips(row, col, orientation, 0);
 	expect(game.player1Board.boardArray).toEqual([
 		['o', 'o', '', '', '', ''],
 		['o', 'o', '', '', '', ''],
@@ -107,10 +107,10 @@ test('Game will not add a ship if the space is already occupied', () => {
 	let col = '0';
 	let orientation = 'v';
 
-	game.addShipsP1(row, col, orientation);
-	expect(game.addShipsP1(row, col, orientation)).toBe(undefined);
-	game.addShipsP1(row + 2, col, orientation);
-	game.addShipsP1(row, col + 1, orientation);
+	game.addShips(row, col, orientation, 0);
+	expect(game.addShips(row, col, orientation, 0)).toBe(undefined);
+	game.addShips(row + 2, col, orientation, 0);
+	game.addShips(row, col + 1, orientation, 0);
 
 	expect(game.player1Board.boardArray).toEqual([
 		['o', 'o', '', '', '', ''],
@@ -166,24 +166,4 @@ test('Game will fire at correct spots in the specified board', () => {
 		['', '', '', 'o', '', ''],
 		['', 'o', 'o', 'o', '', ''],
 	]);
-});
-
-test('playRound does not trigger if game is over, but will if a new game is started', () => {
-	const game = new Game();
-	const prompt = function () {};
-	game.player1Board.fireAt = function () {};
-
-	game.player2Board.boardArray = [
-		['', '', 'o', 'x', 'x', ''],
-		['', '', '', '', '', ''],
-		['', '', '', 'x', '', ''],
-		['', '', '', 'x', '', ''],
-		['', '', '', 'x', '', ''],
-		['', 'x', 'x', 'x', '', ''],
-	];
-
-	game.player2Board.fireAt('0', '2');
-	expect(game.playRound(prompt)).toBe('Game is Over');
-	game.startGame(prompt);
-	expect(game.playRound(prompt)).toBe('Round is played');
 });
