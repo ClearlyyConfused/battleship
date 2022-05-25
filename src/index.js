@@ -1,10 +1,16 @@
 import { Game } from './gameLogic';
-import { createBoardDisplay, fireAtP1, fireAtP2 } from './gameDisplay';
+import {
+	createBoardDisplay,
+	fireAtP1,
+	fireAtP2,
+	removeDisplay,
+} from './gameDisplay';
 
-const game = new Game();
+let game = new Game();
 
 document.querySelector('#startGame').addEventListener('click', () => {
 	game.startGame(prompt);
+	removeDisplay();
 	createBoardDisplay(game, 'boardDisplay1');
 	createBoardDisplay(game, 'boardDisplay2');
 });

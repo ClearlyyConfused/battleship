@@ -100,6 +100,11 @@ function displayShipsP2(game) {
 	}
 }
 
+function removeDisplay() {
+	document.querySelector('#boardDisplay1 ').innerHTML = '';
+	document.querySelector('#boardDisplay2 ').innerHTML = '';
+}
+
 function fireAtP1(game) {
 	game.fireMode = true;
 	let x = 0;
@@ -156,4 +161,4 @@ function fireAtP2(game) {
 	}
 }
 
-export { createBoardDisplay, fireAtP1, fireAtP2 };
+export { createBoardDisplay, fireAtP1, fireAtP2, removeDisplay };
