@@ -1,10 +1,5 @@
 import { Game } from './gameLogic';
-import {
-	createBoardDisplay,
-	fireAtP1,
-	fireAtP2,
-	removeDisplay,
-} from './gameDisplay';
+import { createBoardDisplay, fireAt, removeDisplay } from './gameDisplay';
 
 let game = new Game();
 
@@ -16,6 +11,5 @@ document.querySelector('#startGame').addEventListener('click', () => {
 });
 
 document.querySelector('#fireAt').addEventListener('click', () => {
-	fireAtP1(game);
-	fireAtP2(game);
+	fireAt(game);
 });
