@@ -38,7 +38,9 @@ test('Adding a ship on an already occupied space leads to an error', () => {
 	let gameboard = new GameBoard();
 
 	gameboard.addShip(4, 1, 0, 'h');
-	expect(gameboard.addShip(4, 1, 3, 'v')).toBe('Error, cannot place here!');
+	expect(() => {
+		gameboard.addShip(4, 1, 3, 'v');
+	}).toThrow();
 });
 
 test('Able to choose spots on the board to fire at', () => {

@@ -1,46 +1,55 @@
 function createBoardDisplay(game, board) {
 	let x = 0;
 
-	if (board === 'boardDisplay1') {
-		while (x < 6) {
-			let row = createRow(game, 0, game.player1Board.boardArray);
-			row.setAttribute('class', `row${x}`);
-			document.querySelector(`#${board}`).appendChild(row);
-			x += 1;
-		}
+	while (x < 6) {
+		let row = assignRow(game, board);
+		row.setAttribute('class', `row${x}`);
+		document.querySelector(`#${board}`).appendChild(row);
+		x += 1;
 	}
+}
 
-	if (board === 'boardDisplay2') {
-		while (x < 6) {
-			let row = createRow(game, 1, game.player2Board.boardArray);
-			row.setAttribute('class', `row${x}`);
-			document.querySelector(`#${board}`).appendChild(row);
-			x += 1;
-		}
+function assignRow(game, board) {
+	if (board === 'boardDisplay1') {
+		return createRow(game, 0, game.player1Board.boardArray);
+	} else if (board === 'boardDisplay2') {
+		return createRow(game, 1, game.player2Board.boardArray);
 	}
 }
 
 function createRow(game, player, playerBoard) {
-	let x = 0;
+	let columnNum = 0;
 	let row = document.createElement('div');
 
-	while (x < 6) {
-		let column = document.createElement('div');
-		column.setAttribute('class', `column${x}`);
-
-		column.addEventListener('click', () => {
-			if (game.fireMode === false) {
-				let col = column.className.slice(-1);
-				let row = column.parentNode.className.slice(-1);
-				game.addShips(row, col, 'v', player);
-				displayShips(player, playerBoard);
-			}
-		});
-
+	while (columnNum < 6) {
+		let column = createColumn(game, player, playerBoard, columnNum);
 		row.appendChild(column);
-		x += 1;
+		columnNum += 1;
 	}
 	return row;
+}
+
+function createColumn(game, player, playerBoard, columnNum) {
+	let column = document.createElement('div');
+	column.setAttribute('class', `column${columnNum}`);
+	column.addEventListener('click', () => {
+		addShips(game, player, playerBoard, column);
+	});
+	return column;
+}
+
+function removeDisplay() {
+	document.querySelector('#boardDisplay1 ').innerHTML = '';
+	document.querySelector('#boardDisplay2 ').innerHTML = '';
+}
+
+function addShips(game, player, playerBoard, column) {
+	if (game.fireMode === false) {
+		let col = column.className.slice(-1);
+		let row = column.parentNode.className.slice(-1);
+		game.addShips(row, col, 'h', player);
+		displayShips(player, playerBoard);
+	}
 }
 
 function displayShips(player, playerBoard) {
@@ -62,61 +71,43 @@ function displayShips(player, playerBoard) {
 	}
 }
 
-function removeDisplay() {
-	document.querySelector('#boardDisplay1 ').innerHTML = '';
-	document.querySelector('#boardDisplay2 ').innerHTML = '';
-}
-
-function fireAt(game) {
+function beginFireMode(game) {
 	game.fireMode = true;
+	let spots;
 	let x = 0;
 	let y = 0;
 
 	while (x < 6) {
 		y = 0;
 		while (y < 6) {
-			let spots = document.querySelectorAll(`#boardDisplay1 .row${x} .column${y}`);
-			for (const spot of spots) {
-				let px = x;
-				let py = y;
-				spot.addEventListener('click', () => {
-					if (
-						game.player1Board.gameStatus === true &&
-						game.player2Board.gameStatus === true
-					) {
-						game.player1Board.fireAt(px, py);
-						displayShips(0, game.player1Board.boardArray);
-					}
-				});
-			}
-			y += 1;
-		}
-		x += 1;
-	}
+			spots = document.querySelectorAll(`#boardDisplay1 .row${x} .column${y}`);
+			assignFireAt(spots, game, game.player1Board, x, y, 0);
 
-	x = 0;
-	y = 0;
-	while (x < 6) {
-		y = 0;
-		while (y < 6) {
-			let spots = document.querySelectorAll(`#boardDisplay2 .row${x} .column${y}`);
-			for (const spot of spots) {
-				let px = x;
-				let py = y;
-				spot.addEventListener('click', () => {
-					if (
-						game.player1Board.gameStatus === true &&
-						game.player2Board.gameStatus === true
-					) {
-						game.player2Board.fireAt(px, py);
-						displayShips(1, game.player2Board.boardArray);
-					}
-				});
-			}
+			spots = document.querySelectorAll(`#boardDisplay2 .row${x} .column${y}`);
+			assignFireAt(spots, game, game.player2Board, x, y, 1);
+
 			y += 1;
 		}
 		x += 1;
 	}
 }
 
-export { createBoardDisplay, fireAt, removeDisplay };
+function assignFireAt(spots, game, playerBoard, x, y, player) {
+	for (const spot of spots) {
+		spot.addEventListener('click', () => {
+			fireAt(game, playerBoard, x, y, player);
+		});
+	}
+}
+
+function fireAt(game, board, px, py, player) {
+	if (
+		game.player1Board.gameStatus === true &&
+		game.player2Board.gameStatus === true
+	) {
+		board.fireAt(px, py);
+		displayShips(player, board.boardArray);
+	}
+}
+
+export { createBoardDisplay, beginFireMode, removeDisplay };

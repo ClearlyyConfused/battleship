@@ -101,15 +101,16 @@ test('Game will add correct ships at the correct spots in the correct game board
 	]);
 });
 
-test('Game will not add a ship if the space is already occupied', () => {
+test('Game will not add a ship if the space is already occupied (vertical)', () => {
 	const game = new Game();
 	let row = '0';
 	let col = '0';
 	let orientation = 'v';
 
 	game.addShips(row, col, orientation, 0);
-	expect(game.addShips(row, col, orientation, 0)).toBe(undefined);
-	game.addShips(row + 2, col, orientation, 0);
+	expect(() => {
+		game.addShips(row + 2, col, orientation, 0);
+	}).toThrow();
 	game.addShips(row, col + 1, orientation, 0);
 
 	expect(game.player1Board.boardArray).toEqual([

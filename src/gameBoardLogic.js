@@ -15,38 +15,55 @@ class GameBoard {
 		row = parseInt(row);
 		col = parseInt(col);
 
-		if (orientation === 'h') {
-			let x = 0;
-			while (x < length) {
-				if (this.boardArray[row][col + x] === '') {
-				} else {
-					return 'Error, cannot place here!';
-				}
-				x += 1;
-			}
-
-			x = 0;
-			while (x < length) {
-				this.boardArray[row][col + x] = 'o';
-				x += 1;
-			}
+		if (orientation === 'h' && this.checkMoveH(length, row, col)) {
+			this.addShipH(length, row, col);
+			return;
 		}
-		if (orientation === 'v') {
-			let x = 0;
-			while (x < length) {
-				if (this.boardArray[row + x][col] === '') {
-				} else {
-					return 'Error, cannot place here!';
-				}
-				x += 1;
-			}
-
-			x = 0;
-			while (x < length) {
-				this.boardArray[row + x][col] = 'o';
-				x += 1;
-			}
+		if (orientation === 'v' && this.checkMoveV(length, row, col)) {
+			this.addShipV(length, row, col);
+			return;
 		}
+		throw 'Error, cannot place here!';
+	}
+
+	addShipH(length, row, col) {
+		let x = 0;
+		while (x < length) {
+			this.boardArray[row][col + x] = 'o';
+			x += 1;
+		}
+	}
+
+	addShipV(length, row, col) {
+		let x = 0;
+		while (x < length) {
+			this.boardArray[row + x][col] = 'o';
+			x += 1;
+		}
+	}
+
+	checkMoveH(length, row, col) {
+		let x = 0;
+		while (x < length) {
+			if (this.boardArray[row][col + x] === '') {
+			} else {
+				return false;
+			}
+			x += 1;
+		}
+		return true;
+	}
+
+	checkMoveV(length, row, col) {
+		let x = 0;
+		while (x < length) {
+			if (this.boardArray[row + x][col] === '') {
+			} else {
+				return false;
+			}
+			x += 1;
+		}
+		return true;
 	}
 
 	fireAt(row, col) {

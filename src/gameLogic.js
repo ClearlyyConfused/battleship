@@ -33,33 +33,20 @@ class Game {
 			length = 5;
 		}
 
-		if (this.checkLegalMove(player, row, col, length) === false) {
-			return;
-		}
-
 		if (this.ship1[player] === false) {
 			this.boards[player].addShip(length, row, col, orientation);
 			this.ship1[player] = true;
+			return;
 		} else if (this.ship2[player] === false) {
 			this.boards[player].addShip(length, row, col, orientation);
 			this.ship2[player] = true;
+			return;
 		} else if (this.ship3[player] === false) {
 			this.boards[player].addShip(length, row, col, orientation);
 			this.ship3[player] = true;
+			return;
 		}
 		console.log(this.boards[player].boardArray);
-	}
-
-	checkLegalMove(player, row, col, length) {
-		let x = 0;
-		while (x < length) {
-			if (this.boards[player].boardArray[parseInt(row) + x][parseInt(col)] === '') {
-			} else {
-				return false;
-			}
-			x += 1;
-		}
-		return true;
 	}
 }
 
