@@ -72,6 +72,11 @@ class GameBoard {
 				this.boardArray[row][col] = 'x';
 			} else if (this.boardArray[row][col] === '') {
 				this.boardArray[row][col] = 'm';
+			} else if (
+				this.boardArray[row][col] === 'x' ||
+				this.boardArray[row][col] === 'm'
+			) {
+				throw 'You already shot here!';
 			}
 			this.checkWin();
 		}

@@ -127,6 +127,24 @@ function fireAt(game, board, px, py, player) {
 	) {
 		board.fireAt(px, py);
 		displayShips(player, board.boardArray);
+		enemyFireAt(game);
+	}
+}
+
+function enemyFireAt(game) {
+	try {
+		if (
+			game.player1Board.gameStatus === true &&
+			game.player2Board.gameStatus === true
+		) {
+			let x = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+			let y = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+			game.player1Board.fireAt(x, y);
+			displayShips(0, game.player1Board.boardArray);
+		}
+	} catch (error) {
+		console.log('already shot there');
+		enemyFireAt(game);
 	}
 }
 
