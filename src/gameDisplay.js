@@ -33,7 +33,11 @@ function createColumn(game, player, playerBoard, columnNum) {
 	let column = document.createElement('div');
 	column.setAttribute('class', `column${columnNum}`);
 	column.addEventListener('click', () => {
-		addShips(game, player, playerBoard, column);
+		addShipsV(game, player, playerBoard, column);
+	});
+	column.addEventListener('contextmenu', (e) => {
+		e.preventDefault();
+		addShipsH(game, player, playerBoard, column);
 	});
 	return column;
 }
@@ -43,7 +47,16 @@ function removeDisplay() {
 	document.querySelector('#boardDisplay2 ').innerHTML = '';
 }
 
-function addShips(game, player, playerBoard, column) {
+function addShipsV(game, player, playerBoard, column) {
+	if (game.fireMode === false) {
+		let col = column.className.slice(-1);
+		let row = column.parentNode.className.slice(-1);
+		game.addShips(row, col, 'v', player);
+		displayShips(player, playerBoard);
+	}
+}
+
+function addShipsH(game, player, playerBoard, column) {
 	if (game.fireMode === false) {
 		let col = column.className.slice(-1);
 		let row = column.parentNode.className.slice(-1);
