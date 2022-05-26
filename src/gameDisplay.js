@@ -144,44 +144,50 @@ function enemyFireAt(game) {
 			game.player1Board.gameStatus === true &&
 			game.player2Board.gameStatus === true
 		) {
-			let z = 0;
-			let x = 0;
-			while (x < 6) {
-				let y = 0;
+			const randomNum = Math.floor(Math.random() * 11);
 
-				while (y < 6) {
-					if (game.player1Board.boardArray[x][y] === 'x') {
-						let result = enemyFireAtSmart(game, x, y);
-						if (result === 'success') {
-							return;
+			if (randomNum > 5) {
+				let x = 0;
+				while (x < 6) {
+					let y = 0;
+
+					while (y < 6) {
+						if (game.player1Board.boardArray[x][y] === 'o') {
+							if (enemyFireAtSmart(game, x, y) === 'success') {
+								return;
+							} else {
+								y += 1;
+								continue;
+							}
 						}
+						y += 1;
 					}
-					y += 1;
+					x += 1;
+					if (x === 6) {
+						x = 0;
+					}
 				}
-				x += 1;
 			}
 
-			console.log('Random');
+			console.log('Random shot');
 			let xe = Math.floor(Math.random() * (5 - 0 + 1) + 0);
 			let ye = Math.floor(Math.random() * (5 - 0 + 1) + 0);
 			game.player1Board.fireAt(xe, ye);
 			displayShips(0, game.player1Board.boardArray);
 		}
 	} catch (error) {
-		console.log('error');
 		enemyFireAt(game);
 	}
 }
 
 function enemyFireAtSmart(game, x, y) {
-	try {
-		let xAdd = Math.floor(Math.random() * (1 - -1 + 1) + -1);
-		let yAdd = Math.floor(Math.random() * (1 - -1 + 1) + -1);
-		game.player1Board.fireAt(x + xAdd, y);
+	const randomNum = Math.floor(Math.random() * 101);
+
+	if (randomNum <= 5) {
+		game.player1Board.fireAt(x, y);
 		displayShips(0, game.player1Board.boardArray);
-		console.log('aimbot');
 		return 'success';
-	} catch (error) {
+	} else {
 		return 'failure';
 	}
 }

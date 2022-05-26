@@ -67,6 +67,9 @@ class GameBoard {
 	}
 
 	fireAt(row, col) {
+		if (row > 5 || col > 5 || row < 0 || col < 0) {
+			throw 'Error, out of board';
+		}
 		if (this.gameStatus === true) {
 			if (this.boardArray[row][col] === 'o') {
 				this.boardArray[row][col] = 'x';
