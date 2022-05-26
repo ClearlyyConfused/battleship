@@ -1,83 +1,97 @@
-import { displayShips } from './gameDisplay';
+import { displayShips } from './functionsPlayer';
 
-function createBoardDisplayAI(game, board) {
-	let x = 0;
-
-	while (x < 6) {
-		let row = assignRowAI(game, board);
-		row.setAttribute('class', `row${x}`);
-		document.querySelector(`#${board}`).appendChild(row);
-		x += 1;
-	}
-
-	addShipsAI(game, 1, game.player2Board.boardArray);
-	addShipsAI(game, 1, game.player2Board.boardArray);
-	addShipsAI(game, 1, game.player2Board.boardArray);
+function addShipsAI(game) {
+	createShipAI(game, 1, game.player2Board.boardArray);
+	createShipAI(game, 1, game.player2Board.boardArray);
+	createShipAI(game, 1, game.player2Board.boardArray);
 }
 
-function assignRowAI(game, board) {
-	if (board === 'boardDisplay1') {
-		return createRowAI(game, 0, game.player1Board.boardArray);
-	} else if (board === 'boardDisplay2') {
-		return createRowAI(game, 1, game.player2Board.boardArray);
-	}
-}
-
-function createRowAI(game, player, playerBoard) {
-	let columnNum = 0;
-	let row = document.createElement('div');
-
-	while (columnNum < 6) {
-		let column = createColumnAI(game, player, playerBoard, columnNum);
-		row.appendChild(column);
-		columnNum += 1;
-	}
-	return row;
-}
-
-function createColumnAI(game, player, playerBoard, columnNum) {
-	let column = document.createElement('div');
-	column.setAttribute('class', `column${columnNum}`);
-
-	return column;
-}
-
-function addShipsAI(game, player, playerBoard) {
-	let orientation = Math.floor(Math.random() * (1 - 0 + 1) + 0);
-	if (orientation === 0) {
-		orientation = 'v';
-	} else if (orientation === 1) {
-		orientation = 'h';
-	}
-
+function createShipAI(game, player, playerBoard) {
 	try {
-		let col = Math.floor(Math.random() * (5 - 0 + 1) + 0);
-		let row = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+		let orientation = generateRandomOrientation();
+		let col = Math.floor(Math.random() * 6);
+		let row = Math.floor(Math.random() * 6);
 		game.addShips(row, col, orientation, player);
 		displayShips(player, playerBoard);
 	} catch (error) {
-		console.log(`Error: ${error}`);
 		addShipsAI(game, player, playerBoard);
 	}
 }
 
-function displayShipsAI(player, playerBoard) {
-	let x = 0;
-	let y = 0;
+function generateRandomOrientation() {
+	let orientation = Math.floor(Math.random() * 2);
+	if (orientation === 0) {
+		return 'v';
+	} else if (orientation === 1) {
+		return 'h';
+	}
+}
 
+function AIFireAt(game) {
+	try {
+		if (game.checkGameStatus()) {
+			if (difficultyLevel(1) > 5) {
+				fireSpecific(game);
+			} else {
+				fireRandom(game);
+			}
+		}
+	} catch (error) {
+		AIFireAt(game);
+	}
+}
+
+function difficultyLevel(difficulty) {
+	if (difficulty === 0) {
+		return Math.floor(Math.random() * 6);
+	}
+	if (difficulty === 1) {
+		return Math.floor(Math.random() * 9);
+	}
+	if (difficulty === 2) {
+		return Math.floor(Math.random() * 14);
+	}
+}
+
+function fireSpecific(game) {
+	let x = 0;
 	while (x < 6) {
-		y = 0;
+		let y = 0;
+
 		while (y < 6) {
-			let spots = document.querySelectorAll(
-				`#boardDisplay${player + 1} .row${x} .column${y}`
-			);
-			for (const spot of spots) {
-				spot.innerText = playerBoard[x][y];
+			if (game.player1Board.boardArray[x][y] === 'o') {
+				if (selectShip() === 'chosen') {
+					game.player1Board.fireAt(x, y);
+					displayShips(0, game.player1Board.boardArray);
+					return;
+				} else {
+					y += 1;
+					continue;
+				}
 			}
 			y += 1;
 		}
 		x += 1;
+		if (x === 6) {
+			x = 0;
+		}
 	}
 }
 
-export { createBoardDisplayAI, displayShipsAI };
+function fireRandom(game) {
+	let x = Math.floor(Math.random() * 6);
+	let y = Math.floor(Math.random() * 6);
+	game.player1Board.fireAt(x, y);
+	displayShips(0, game.player1Board.boardArray);
+}
+
+function selectShip() {
+	const randomNum = Math.floor(Math.random() * 101);
+	if (randomNum <= 5) {
+		return 'chosen';
+	} else {
+		return 'not chosen';
+	}
+}
+
+export { AIFireAt, addShipsAI };

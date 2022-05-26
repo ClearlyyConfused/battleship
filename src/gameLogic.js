@@ -48,6 +48,17 @@ class Game {
 		}
 		console.log(this.boards[player].boardArray);
 	}
+
+	checkGameStatus() {
+		if (
+			this.player1Board.gameStatus === true &&
+			this.player2Board.gameStatus === true
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 export { Game };

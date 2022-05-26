@@ -1,15 +1,10 @@
 import { Game } from './gameLogic';
-import { createBoardDisplay, beginFireMode, removeDisplay } from './gameDisplay';
-import { createBoardDisplayAI } from './functionsAI';
-import { displayShipsAI } from './functionsAI';
+import { beginFireMode, displayShips } from './functionsPlayer';
+import { createBoard, removeBoard } from './createBoard';
+import { addShipsAI } from './functionsAI';
 
-let game = new Game();
-
-document.querySelector('#startGame').addEventListener('click', () => {
-	game.startGame(prompt);
-	removeDisplay();
-	createBoardDisplay(game, 'boardDisplay1');
-	createBoardDisplayAI(game, 'boardDisplay2');
+document.querySelector('#resetGame').addEventListener('click', () => {
+	setUpGame(game);
 });
 
 document.querySelector('#fireAt').addEventListener('click', () => {
@@ -17,5 +12,15 @@ document.querySelector('#fireAt').addEventListener('click', () => {
 });
 
 document.querySelector('#displayShipsAI').addEventListener('click', () => {
-	displayShipsAI(1, game.player2Board.boardArray);
+	displayShips(1, game.player2Board.boardArray, true);
 });
+
+let game = new Game();
+function setUpGame(game) {
+	game.startGame(prompt);
+	removeBoard();
+	createBoard(game, 'boardDisplay1');
+	createBoard(game, 'boardDisplay2');
+	addShipsAI(game);
+}
+setUpGame(game);
