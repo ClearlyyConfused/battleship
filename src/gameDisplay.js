@@ -79,9 +79,15 @@ function displayShips(player, playerBoard) {
 				spot.innerText = '';
 				if (player === 0) {
 					spot.innerText = playerBoard[x][y];
-				} else {
+					if (playerBoard[x][y] === 'x') {
+						spot.style.backgroundColor = 'red';
+					}
+				} else if (player === 1) {
 					if (playerBoard[x][y] !== 'o') {
 						spot.innerText = playerBoard[x][y];
+					}
+					if (playerBoard[x][y] === 'x') {
+						spot.style.backgroundColor = 'green';
 					}
 				}
 			}
@@ -132,19 +138,51 @@ function fireAt(game, board, px, py, player) {
 }
 
 function enemyFireAt(game) {
+	console.log('---------');
 	try {
 		if (
 			game.player1Board.gameStatus === true &&
 			game.player2Board.gameStatus === true
 		) {
-			let x = Math.floor(Math.random() * (5 - 0 + 1) + 0);
-			let y = Math.floor(Math.random() * (5 - 0 + 1) + 0);
-			game.player1Board.fireAt(x, y);
+			let z = 0;
+			let x = 0;
+			while (x < 6) {
+				let y = 0;
+
+				while (y < 6) {
+					if (game.player1Board.boardArray[x][y] === 'x') {
+						let result = enemyFireAtSmart(game, x, y);
+						if (result === 'success') {
+							return;
+						}
+					}
+					y += 1;
+				}
+				x += 1;
+			}
+
+			console.log('Random');
+			let xe = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+			let ye = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+			game.player1Board.fireAt(xe, ye);
 			displayShips(0, game.player1Board.boardArray);
 		}
 	} catch (error) {
-		console.log('already shot there');
+		console.log('error');
 		enemyFireAt(game);
+	}
+}
+
+function enemyFireAtSmart(game, x, y) {
+	try {
+		let xAdd = Math.floor(Math.random() * (1 - -1 + 1) + -1);
+		let yAdd = Math.floor(Math.random() * (1 - -1 + 1) + -1);
+		game.player1Board.fireAt(x + xAdd, y);
+		displayShips(0, game.player1Board.boardArray);
+		console.log('aimbot');
+		return 'success';
+	} catch (error) {
+		return 'failure';
 	}
 }
 
