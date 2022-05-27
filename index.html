@@ -6,14 +6,35 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>BattleShip</title>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Blaka&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="shortcut icon" href="battleship.svg" type="image/x-icon" />
 	</head>
 	<body>
-		<button id="resetGame">Reset Game</button>
-		<button id="fireAt">Fire At</button>
-		<button id="displayShipsAI">Display AI Ships</button>
+		<div id="header">
+			<div id="title">
+				<div>BattleShip</div>
+				<img src="battleship.svg" alt="battleship Icon" />
+			</div>
+			<div id="buttons">
+				<button id="fireAt">Fire At</button>
+				<button id="resetGame">Reset Game</button>
+				<button id="displayShipsAI">Display AI Ships</button>
+			</div>
+		</div>
 		<div id="display">
 			<div id="boardDisplay1"></div>
 			<div id="boardDisplay2"></div>
+		</div>
+		<div id="footer">
+			<div id="gamePhase">Placement Phase</div>
+			<div id="phaseDescription">
+				Place your ships using LMB (vertical) and RMB (horizontal)
+			</div>
 		</div>
 		<script src="main.js"></script>
 	</body>
