@@ -26,6 +26,9 @@ function displayShips(player, playerBoard, showAI = false) {
 					if (playerBoard[x][y] === 'x') {
 						spot.style.backgroundColor = 'red';
 					}
+					if (playerBoard[x][y] === 'm') {
+						spot.style.backgroundColor = 'lightblue';
+					}
 				} else if (player === 1) {
 					if (playerBoard[x][y] !== 'o') {
 						spot.innerText = playerBoard[x][y];
@@ -35,6 +38,9 @@ function displayShips(player, playerBoard, showAI = false) {
 					}
 					if (playerBoard[x][y] === 'x') {
 						spot.style.backgroundColor = 'green';
+					}
+					if (playerBoard[x][y] === 'm') {
+						spot.style.backgroundColor = 'lightblue';
 					}
 				}
 			}
