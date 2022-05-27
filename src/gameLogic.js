@@ -44,9 +44,8 @@ class Game {
 		} else if (this.ship3[player] === false) {
 			this.boards[player].addShip(length, row, col, orientation);
 			this.ship3[player] = true;
-			return;
+			return 'beginFirePhase';
 		}
-		console.log(this.boards[player].boardArray);
 	}
 
 	checkGameStatus() {

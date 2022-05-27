@@ -2,7 +2,7 @@ import { Game } from './gameLogic';
 import { beginFireMode, displayShips } from './functionsPlayer';
 import { createBoard, removeBoard } from './createBoard';
 import { addShipsAI } from './functionsAI';
-import { placementPhase, firePhase } from './webpageDisplay';
+import { displayPlacementPhase } from './webpageDisplay';
 
 document.querySelector('#resetGame').addEventListener('click', () => {
 	setUpGame(game);
@@ -10,7 +10,6 @@ document.querySelector('#resetGame').addEventListener('click', () => {
 
 document.querySelector('#fireAt').addEventListener('click', () => {
 	beginFireMode(game);
-	firePhase();
 });
 
 document.querySelector('#displayShipsAI').addEventListener('click', () => {
@@ -23,7 +22,7 @@ function setUpGame(game) {
 	createBoard(game, 'boardDisplay1');
 	createBoard(game, 'boardDisplay2');
 	addShipsAI(game);
-	placementPhase();
+	displayPlacementPhase();
 }
 
 let game = new Game();

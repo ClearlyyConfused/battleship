@@ -1,10 +1,13 @@
 import { AIFireAt } from './functionsAI';
+import { displayFirePhase } from './webpageDisplay';
 
 function addShipPlayer(game, player, playerBoard, column, orientation) {
 	if (game.fireMode === false) {
 		let col = column.className.slice(-1);
 		let row = column.parentNode.className.slice(-1);
-		game.addShips(row, col, orientation, player);
+		if (game.addShips(row, col, orientation, player) === 'beginFirePhase') {
+			beginFireMode(game);
+		}
 		displayShips(player, playerBoard);
 	}
 }
@@ -52,6 +55,7 @@ function displayShips(player, playerBoard, showAI = false) {
 
 function beginFireMode(game) {
 	game.fireMode = true;
+	displayFirePhase();
 	let spots;
 	let x = 0;
 	let y = 0;
