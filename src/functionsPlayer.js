@@ -1,5 +1,5 @@
 import { AIFireAt } from './functionsAI';
-import { displayFirePhase } from './webpageDisplay';
+import { displayFirePhase, displayGameOver } from './webpageDisplay';
 
 function addShipPlayer(game, player, playerBoard, column, orientation) {
 	if (game.fireMode === false) {
@@ -84,6 +84,11 @@ function fireAt(game, board, px, py, player) {
 		board.fireAt(px, py);
 		displayShips(player, board.boardArray);
 		AIFireAt(game);
+	}
+
+	console.log(game.checkGameStatus());
+	if (game.checkGameStatus() === false) {
+		displayGameOver(game);
 	}
 }
 

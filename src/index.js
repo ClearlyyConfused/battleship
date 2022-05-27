@@ -1,11 +1,12 @@
 import { Game } from './gameLogic';
-import { beginFireMode, displayShips } from './functionsPlayer';
+import { displayShips } from './functionsPlayer';
 import { createBoard, removeBoard } from './createBoard';
 import { addShipsAI } from './functionsAI';
-import { displayPlacementPhase } from './webpageDisplay';
+import { displayPlacementPhase, hideGameOver } from './webpageDisplay';
 
 document.querySelector('#resetGame').addEventListener('click', () => {
 	setUpGame(game);
+	hideGameOver();
 });
 
 document.querySelector('#displayShipsAI').addEventListener('click', () => {
@@ -23,3 +24,5 @@ function setUpGame(game) {
 
 let game = new Game();
 setUpGame(game);
+
+export { setUpGame };

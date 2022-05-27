@@ -8,6 +8,7 @@ class Game {
 		this.ship1 = [false, false];
 		this.ship2 = [false, false];
 		this.ship3 = [false, false];
+		this.ship4 = [false, false];
 		this.fireMode = false;
 	}
 
@@ -17,6 +18,7 @@ class Game {
 		this.ship1 = [false, false];
 		this.ship2 = [false, false];
 		this.ship3 = [false, false];
+		this.ship4 = [false, false];
 		this.fireMode = false;
 		this.player1Board.resetBoard();
 		this.player2Board.resetBoard();
@@ -26,10 +28,12 @@ class Game {
 		let length;
 
 		if (this.ship1[player] === false) {
-			length = 3;
+			length = 2;
 		} else if (this.ship2[player] === false) {
-			length = 4;
+			length = 3;
 		} else if (this.ship3[player] === false) {
+			length = 4;
+		} else if (this.ship4[player] === false) {
 			length = 5;
 		}
 
@@ -44,6 +48,10 @@ class Game {
 		} else if (this.ship3[player] === false) {
 			this.boards[player].addShip(length, row, col, orientation);
 			this.ship3[player] = true;
+			return;
+		} else if (this.ship4[player] === false) {
+			this.boards[player].addShip(length, row, col, orientation);
+			this.ship4[player] = true;
 			return 'beginFirePhase';
 		}
 	}
