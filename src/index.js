@@ -8,10 +8,6 @@ document.querySelector('#resetGame').addEventListener('click', () => {
 	setUpGame(game);
 });
 
-document.querySelector('#fireAt').addEventListener('click', () => {
-	beginFireMode(game);
-});
-
 document.querySelector('#displayShipsAI').addEventListener('click', () => {
 	displayShips(1, game.player2Board.boardArray, true);
 });

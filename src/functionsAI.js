@@ -28,9 +28,11 @@ function generateRandomOrientation() {
 }
 
 function AIFireAt(game) {
+	const difficulty = document.querySelector('#difficultyLevel').value;
 	try {
 		if (game.checkGameStatus()) {
-			if (difficultyLevel(1) > 5) {
+			if (difficultyLevel(parseInt(difficulty)) > 5) {
+				console.log('aimbot');
 				fireSpecific(game);
 			} else {
 				fireRandom(game);
@@ -43,12 +45,15 @@ function AIFireAt(game) {
 
 function difficultyLevel(difficulty) {
 	if (difficulty === 0) {
-		return Math.floor(Math.random() * 6);
+		console.log('easy');
+		return Math.floor(Math.random() * 7);
 	}
 	if (difficulty === 1) {
+		console.log('medium');
 		return Math.floor(Math.random() * 9);
 	}
 	if (difficulty === 2) {
+		console.log('hard');
 		return Math.floor(Math.random() * 14);
 	}
 }
