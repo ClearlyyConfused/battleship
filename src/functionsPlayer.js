@@ -59,9 +59,6 @@ function beginFireMode(game) {
 	while (x < 6) {
 		y = 0;
 		while (y < 6) {
-			spots = document.querySelectorAll(`#boardDisplay1 .row${x} .column${y}`);
-			assignFireAt(spots, game, game.player1Board, x, y, 0);
-
 			spots = document.querySelectorAll(`#boardDisplay2 .row${x} .column${y}`);
 			assignFireAt(spots, game, game.player2Board, x, y, 1);
 			y += 1;
