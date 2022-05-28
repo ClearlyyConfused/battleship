@@ -1,29 +1,34 @@
-import { setUpGame } from './index';
+import { setUpGame } from '../index';
 
-function displayCurrentShip(game) {
+function createCurrentShipDisplay(game) {
 	const display = document.querySelector('#boardDisplay2');
-	display.innerHTML = '';
-	const ship = document.createElement('div');
-	ship.setAttribute('id', 'currentShipDisplay');
+	const currentShipIcon = document.createElement('div');
 	const description = document.createElement('div');
+
+	display.innerHTML = '';
+	display.appendChild(description);
+	display.appendChild(currentShipIcon);
+
+	currentShipIcon.setAttribute('id', 'currentShipDisplay');
 	description.setAttribute('id', 'shipDisplayDescription');
 
+	displayCurrentShipInfo(game, currentShipIcon, description);
+}
+
+function displayCurrentShipInfo(game, currentShipIcon, description) {
 	if (game.ship1[0] === false) {
 		description.innerText = 'Current Ship Size (2)';
-		ship.innerText = 'oo';
+		currentShipIcon.innerText = 'oo';
 	} else if (game.ship2[0] === false) {
 		description.innerText = 'Current Ship Size (3)';
-		ship.innerText = 'ooo';
+		currentShipIcon.innerText = 'ooo';
 	} else if (game.ship3[0] === false) {
 		description.innerText = 'Current Ship Size (4)';
-		ship.innerText = 'oooo';
-	} else if (game.ship4[0] === false) {
+		currentShipIcon.innerText = 'oooo';
+	} else {
 		description.innerText = 'Current Ship Size (5)';
-		ship.innerText = 'ooooo';
+		currentShipIcon.innerText = 'ooooo';
 	}
-
-	display.appendChild(description);
-	display.appendChild(ship);
 }
 
 function displayPlacementPhase() {
@@ -39,24 +44,17 @@ function displayFirePhase() {
 }
 
 function displayGameOver(game) {
-	const gameOver = document.querySelector('#gameOver');
-	gameOver.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+	const gameOverScreen = document.querySelector('#gameOver');
+	gameOverScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 
 	if (game.player1Board.gameStatus === false) {
-		gameOver.innerText = 'Game Over! AI wins!';
+		gameOverScreen.innerText = 'Game Over! AI wins!';
 	}
 	if (game.player2Board.gameStatus === false) {
-		gameOver.innerText = 'Game Over! User wins!';
+		gameOverScreen.innerText = 'Game Over! User wins!';
 	}
 
-	const playAgain = document.createElement('button');
-	gameOver.appendChild(playAgain);
-	playAgain.innerText = 'Play Again!';
-
-	playAgain.addEventListener('click', () => {
-		setUpGame(game);
-		hideGameOver();
-	});
+	gameOverScreen.appendChild(createPlayAgainBTN(game));
 }
 
 function hideGameOver() {
@@ -65,9 +63,21 @@ function hideGameOver() {
 	gameOver.style.backgroundColor = 'rgba(0, 0, 0, 0)';
 }
 
-function displayNumOfShips(array) {
-	document.querySelector('#playerShipAmount').innerText = array[0];
-	document.querySelector('#AIShipAmount').innerText = array[1];
+function createPlayAgainBTN(game) {
+	const playAgain = document.createElement('button');
+	playAgain.innerText = 'Play Again!';
+
+	playAgain.addEventListener('click', () => {
+		setUpGame(game);
+		hideGameOver();
+	});
+
+	return playAgain;
+}
+
+function displayNumOfShips(numOfShips) {
+	document.querySelector('#playerShipAmount').innerText = numOfShips[0];
+	document.querySelector('#AIShipAmount').innerText = numOfShips[1];
 }
 
 export {
@@ -75,6 +85,6 @@ export {
 	displayFirePhase,
 	displayGameOver,
 	hideGameOver,
-	displayCurrentShip,
+	createCurrentShipDisplay,
 	displayNumOfShips,
 };

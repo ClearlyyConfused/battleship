@@ -1,6 +1,7 @@
-import { displayShips } from './functionsPlayer';
+import { displayShips } from './functionsGeneral';
 
 function addShipsAI(game) {
+	createShipAI(game, 1, game.player2Board.boardArray);
 	createShipAI(game, 1, game.player2Board.boardArray);
 	createShipAI(game, 1, game.player2Board.boardArray);
 	createShipAI(game, 1, game.player2Board.boardArray);
@@ -14,7 +15,7 @@ function createShipAI(game, player, playerBoard) {
 		game.addShips(row, col, orientation, player);
 		displayShips(player, playerBoard);
 	} catch (error) {
-		addShipsAI(game, player, playerBoard);
+		createShipAI(game, player, playerBoard);
 	}
 }
 
@@ -31,8 +32,7 @@ function AIFireAt(game) {
 	const difficulty = document.querySelector('#difficultyLevel').value;
 	try {
 		if (game.checkGameStatus()) {
-			if (difficultyLevel(parseInt(difficulty)) > 5) {
-				console.log('aimbot');
+			if (difficultyLevel(difficulty) > 5) {
 				fireSpecific(game);
 			} else {
 				fireRandom(game);
@@ -43,19 +43,11 @@ function AIFireAt(game) {
 	}
 }
 
-function difficultyLevel(difficulty) {
-	if (difficulty === 0) {
-		console.log('easy');
-		return Math.floor(Math.random() * 7);
-	}
-	if (difficulty === 1) {
-		console.log('medium');
-		return Math.floor(Math.random() * 9);
-	}
-	if (difficulty === 2) {
-		console.log('hard');
-		return Math.floor(Math.random() * 14);
-	}
+function fireRandom(game) {
+	let x = Math.floor(Math.random() * 6);
+	let y = Math.floor(Math.random() * 6);
+	game.player1Board.fireAt(x, y);
+	displayShips(0, game.player1Board.boardArray);
 }
 
 function fireSpecific(game) {
@@ -76,18 +68,12 @@ function fireSpecific(game) {
 			}
 			y += 1;
 		}
+
 		x += 1;
 		if (x === 6) {
 			x = 0;
 		}
 	}
-}
-
-function fireRandom(game) {
-	let x = Math.floor(Math.random() * 6);
-	let y = Math.floor(Math.random() * 6);
-	game.player1Board.fireAt(x, y);
-	displayShips(0, game.player1Board.boardArray);
 }
 
 function selectShip() {
@@ -96,6 +82,19 @@ function selectShip() {
 		return 'chosen';
 	} else {
 		return 'not chosen';
+	}
+}
+
+function difficultyLevel(difficulty) {
+	difficulty = parseInt(difficulty);
+	if (difficulty === 0) {
+		return Math.floor(Math.random() * 7);
+	}
+	if (difficulty === 1) {
+		return Math.floor(Math.random() * 9);
+	}
+	if (difficulty === 2) {
+		return Math.floor(Math.random() * 14);
 	}
 }
 

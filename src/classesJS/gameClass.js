@@ -1,4 +1,4 @@
-import { GameBoard } from './gameBoardLogic';
+import { GameBoard } from './gameBoardClass';
 
 class Game {
 	constructor() {

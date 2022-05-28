@@ -1,13 +1,18 @@
-import { Game } from './gameLogic';
-import { displayShips } from './functionsPlayer';
-import { createBoard, removeBoard } from './createBoard';
-import { addShipsAI } from './functionsAI';
+import { Game } from './classesJS/gameClass';
+import { displayShips } from './functionsJS/functionsGeneral';
+import {
+	createBoardDisplay,
+	removeBoardDisplay,
+} from './displayJS/createBoardDisplay';
 import {
 	displayPlacementPhase,
 	hideGameOver,
-	displayCurrentShip,
+	createCurrentShipDisplay,
 	displayNumOfShips,
-} from './webpageDisplay';
+} from './displayJS/webpageDisplay';
+
+const game = new Game();
+setUpGame(game);
 
 document.querySelector('#resetGame').addEventListener('click', () => {
 	setUpGame(game);
@@ -20,14 +25,11 @@ document.querySelector('#displayShipsAI').addEventListener('click', () => {
 
 function setUpGame(game) {
 	game.startGame(prompt);
-	removeBoard();
-	createBoard(game, 'boardDisplay1');
+	removeBoardDisplay();
+	createBoardDisplay(game, 'boardDisplay1');
 	displayPlacementPhase();
-	displayCurrentShip(game);
+	createCurrentShipDisplay(game);
 	displayNumOfShips([0, 0]);
 }
-
-let game = new Game();
-setUpGame(game);
 
 export { setUpGame };

@@ -1,6 +1,6 @@
-import { addShipPlayer } from './functionsPlayer';
+import { addShipPlayer } from '../functionsJS/functionsPlayer';
 
-function createBoard(game, board) {
+function createBoardDisplay(game, board) {
 	let x = 0;
 
 	while (x < 6) {
@@ -11,7 +11,7 @@ function createBoard(game, board) {
 	}
 }
 
-function removeBoard() {
+function removeBoardDisplay() {
 	document.querySelector('#boardDisplay1 ').innerHTML = '';
 	document.querySelector('#boardDisplay2 ').innerHTML = '';
 }
@@ -50,4 +50,4 @@ function createColumn(game, player, playerBoard, columnNum) {
 	return column;
 }
 
-export { createBoard, removeBoard };
+export { createBoardDisplay, removeBoardDisplay };
