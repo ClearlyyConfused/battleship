@@ -2,7 +2,11 @@ import { Game } from './gameLogic';
 import { displayShips } from './functionsPlayer';
 import { createBoard, removeBoard } from './createBoard';
 import { addShipsAI } from './functionsAI';
-import { displayPlacementPhase, hideGameOver } from './webpageDisplay';
+import {
+	displayPlacementPhase,
+	hideGameOver,
+	displayCurrentShip,
+} from './webpageDisplay';
 
 document.querySelector('#resetGame').addEventListener('click', () => {
 	setUpGame(game);
@@ -17,9 +21,8 @@ function setUpGame(game) {
 	game.startGame(prompt);
 	removeBoard();
 	createBoard(game, 'boardDisplay1');
-	createBoard(game, 'boardDisplay2');
-	addShipsAI(game);
 	displayPlacementPhase();
+	displayCurrentShip(game);
 }
 
 let game = new Game();

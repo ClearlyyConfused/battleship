@@ -1,12 +1,22 @@
-import { AIFireAt } from './functionsAI';
+import { AIFireAt, addShipsAI } from './functionsAI';
 import { displayFirePhase, displayGameOver } from './webpageDisplay';
+import { createBoard } from './createBoard';
+import { displayCurrentShip } from './webpageDisplay';
 
 function addShipPlayer(game, player, playerBoard, column, orientation) {
+	let x = 0;
 	if (game.fireMode === false) {
 		let col = column.className.slice(-1);
 		let row = column.parentNode.className.slice(-1);
 		if (game.addShips(row, col, orientation, player) === 'beginFirePhase') {
+			document.querySelector('#boardDisplay2').innerHTML = '';
+			createBoard(game, 'boardDisplay2');
+			addShipsAI(game);
 			beginFireMode(game);
+			x = 1;
+		}
+		if (x === 0) {
+			displayCurrentShip(game);
 		}
 		displayShips(player, playerBoard);
 	}

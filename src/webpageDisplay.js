@@ -1,5 +1,31 @@
 import { setUpGame } from './index';
 
+function displayCurrentShip(game) {
+	const display = document.querySelector('#boardDisplay2');
+	display.innerHTML = '';
+	const ship = document.createElement('div');
+	ship.setAttribute('id', 'currentShipDisplay');
+	const description = document.createElement('div');
+	description.setAttribute('id', 'shipDisplayDescription');
+
+	if (game.ship1[0] === false) {
+		description.innerText = 'Current Ship Size (2)';
+		ship.innerText = 'oo';
+	} else if (game.ship2[0] === false) {
+		description.innerText = 'Current Ship Size (3)';
+		ship.innerText = 'ooo';
+	} else if (game.ship3[0] === false) {
+		description.innerText = 'Current Ship Size (4)';
+		ship.innerText = 'oooo';
+	} else if (game.ship4[0] === false) {
+		description.innerText = 'Current Ship Size (5)';
+		ship.innerText = 'ooooo';
+	}
+
+	display.appendChild(description);
+	display.appendChild(ship);
+}
+
 function displayPlacementPhase() {
 	document.querySelector('#gamePhase').innerText = 'Placement Phase';
 	document.querySelector('#phaseDescription').innerText =
@@ -39,4 +65,10 @@ function hideGameOver() {
 	gameOver.style.backgroundColor = 'rgba(0, 0, 0, 0)';
 }
 
-export { displayPlacementPhase, displayFirePhase, displayGameOver, hideGameOver };
+export {
+	displayPlacementPhase,
+	displayFirePhase,
+	displayGameOver,
+	hideGameOver,
+	displayCurrentShip,
+};
