@@ -1,7 +1,7 @@
 import { AIFireAt, addShipsAI } from './functionsAI';
 import { displayFirePhase, displayGameOver } from './webpageDisplay';
 import { createBoard } from './createBoard';
-import { displayCurrentShip } from './webpageDisplay';
+import { displayCurrentShip, displayNumOfShips } from './webpageDisplay';
 
 function addShipPlayer(game, player, playerBoard, column, orientation) {
 	let x = 0;
@@ -20,6 +20,7 @@ function addShipPlayer(game, player, playerBoard, column, orientation) {
 		}
 		displayShips(player, playerBoard);
 	}
+	countShips(game);
 }
 
 function displayShips(player, playerBoard, showAI = false) {
@@ -96,10 +97,33 @@ function fireAt(game, board, px, py, player) {
 		AIFireAt(game);
 	}
 
-	console.log(game.checkGameStatus());
+	countShips(game);
 	if (game.checkGameStatus() === false) {
 		displayGameOver(game);
 	}
+}
+
+function countShips(game) {
+	let x = 0;
+	let y = 0;
+	let playerCount = 0;
+	let AIcount = 0;
+
+	while (x < 6) {
+		y = 0;
+		while (y < 6) {
+			if (game.player1Board.boardArray[x][y] === 'o') {
+				playerCount += 1;
+			}
+			if (game.player2Board.boardArray[x][y] === 'o') {
+				AIcount += 1;
+			}
+			y += 1;
+		}
+		x += 1;
+	}
+
+	displayNumOfShips([playerCount, AIcount]);
 }
 
 export { beginFireMode, displayShips, addShipPlayer };

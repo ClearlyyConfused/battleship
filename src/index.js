@@ -6,6 +6,7 @@ import {
 	displayPlacementPhase,
 	hideGameOver,
 	displayCurrentShip,
+	displayNumOfShips,
 } from './webpageDisplay';
 
 document.querySelector('#resetGame').addEventListener('click', () => {
@@ -23,6 +24,7 @@ function setUpGame(game) {
 	createBoard(game, 'boardDisplay1');
 	displayPlacementPhase();
 	displayCurrentShip(game);
+	displayNumOfShips([0, 0]);
 }
 
 let game = new Game();

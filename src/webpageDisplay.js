@@ -65,10 +65,16 @@ function hideGameOver() {
 	gameOver.style.backgroundColor = 'rgba(0, 0, 0, 0)';
 }
 
+function displayNumOfShips(array) {
+	document.querySelector('#playerShipAmount').innerText = array[0];
+	document.querySelector('#AIShipAmount').innerText = array[1];
+}
+
 export {
 	displayPlacementPhase,
 	displayFirePhase,
 	displayGameOver,
 	hideGameOver,
 	displayCurrentShip,
+	displayNumOfShips,
 };

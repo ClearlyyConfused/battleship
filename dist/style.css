@@ -445,7 +445,7 @@ body {
 
 #buttons {
 	display: flex;
-	gap: 15px;
+	gap: 10px;
 }
 
 button {
@@ -481,9 +481,14 @@ select:hover {
 
 #footer {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	width: 500px;
+}
+
+#footer > div {
+	font-size: 20px;
+	font-weight: 600;
 }
 
 #gamePhase {
