@@ -397,11 +397,22 @@ body {
 	border: 2px solid black;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 #boardDisplay1:hover,
 #boardDisplay2:hover {
 	cursor: pointer;
+}
+
+#currentShipDisplay {
+	font-size: 90px;
+	font-family: 'Blaka', cursive;
+}
+
+#shipDisplayDescription {
+	font-size: 30px;
 }
 
 .row0,
@@ -411,6 +422,7 @@ body {
 .row4,
 .row5 {
 	height: 100%;
+	width: 100%;
 	display: flex;
 	border: 1px solid black;
 }
