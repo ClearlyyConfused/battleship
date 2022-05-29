@@ -1,4 +1,4 @@
-import { displayFirePhase } from '../displayJS/webpageDisplay';
+import { displayFirePhase, displayNumOfShips } from '../displayJS/webpageDisplay';
 import { fireAt } from './functionsPlayer';
 
 function displayShips(player, playerBoard, showAI = false) {
@@ -68,4 +68,27 @@ function assignFireAt(spots, game, playerBoard, x, y, player) {
 	}
 }
 
-export { displayShips, beginFireMode };
+function countShips(game) {
+	let x = 0;
+	let y = 0;
+	let playerCount = 0;
+	let AIcount = 0;
+
+	while (x < 6) {
+		y = 0;
+		while (y < 6) {
+			if (game.player1Board.boardArray[x][y] === 'o') {
+				playerCount += 1;
+			}
+			if (game.player2Board.boardArray[x][y] === 'o') {
+				AIcount += 1;
+			}
+			y += 1;
+		}
+		x += 1;
+	}
+
+	displayNumOfShips([playerCount, AIcount]);
+}
+
+export { displayShips, beginFireMode, countShips };
