@@ -383,6 +383,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	gap: 15px;
+	background-color: #63d2e8;
 }
 
 #display {
@@ -441,6 +442,17 @@ body {
 	align-items: center;
 	justify-content: center;
 	font-family: 'Blaka', cursive;
+	background-color: #63d2e8;
+	transition: background-color 1s;
+}
+
+.column0:hover,
+.column1:hover,
+.column2:hover,
+.column3:hover,
+.column4:hover,
+.column5:hover {
+	transform: scale(1.05);
 }
 
 #buttons {
