@@ -16,10 +16,11 @@ function displayShips(player, playerBoard, showAI = false) {
 				if (player === 0) {
 					spot.innerText = playerBoard[x][y];
 					if (playerBoard[x][y] === 'x') {
-						spot.style.backgroundColor = 'red';
+						spot.style.backgroundColor = '#FF1654';
 					}
 					if (playerBoard[x][y] === 'm') {
-						spot.style.backgroundColor = 'lightblue';
+						spot.innerText = '';
+						spot.style.backgroundColor = '#4D5382';
 					}
 				} else if (player === 1) {
 					if (playerBoard[x][y] !== 'o') {
@@ -29,10 +30,11 @@ function displayShips(player, playerBoard, showAI = false) {
 						spot.innerText = playerBoard[x][y];
 					}
 					if (playerBoard[x][y] === 'x') {
-						spot.style.backgroundColor = 'green';
+						spot.style.backgroundColor = '#5EFC8D';
 					}
 					if (playerBoard[x][y] === 'm') {
-						spot.style.backgroundColor = 'lightblue';
+						spot.innerText = '';
+						spot.style.backgroundColor = '#4D5382';
 					}
 				}
 			}
