@@ -376,7 +376,6 @@ template {
 }
 
 body {
-	min-width: fit-content;
 	min-height: 100vh;
 	padding: 40px 0px;
 	height: fit-content;
@@ -497,7 +496,7 @@ select:hover {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 500px;
+	width: clamp(320px, 90vw, 500px);
 }
 
 #footer > div {
@@ -515,10 +514,11 @@ select:hover {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	font-size: 100px;
+	font-size: 90px;
 	text-align: center;
 	font-weight: 900;
 	max-width: 600px;
+	height: fit-content;
 	color: white;
 	padding: 20px;
 	display: flex;
@@ -544,5 +544,22 @@ select:hover {
 	}
 	#footer #buttons {
 		flex-direction: column;
+	}
+}
+
+@media (max-width: 400px) {
+	#title {
+		font-size: 55px;
+	}
+	#gamephase {
+		font-size: 16px;
+	}
+	#phaseDescription {
+		font-size: 12px;
+	}
+	#boardDisplay1,
+	#boardDisplay2 {
+		width: 300px;
+		height: 300px;
 	}
 }
