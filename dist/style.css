@@ -376,8 +376,10 @@ template {
 }
 
 body {
-	width: 100vw;
-	height: 100vh;
+	min-width: fit-content;
+	min-height: 100vh;
+	padding: 40px 0px;
+	height: fit-content;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -528,4 +530,19 @@ select:hover {
 #gameOver > button {
 	font-size: 20px;
 	width: fit-content;
+}
+
+@media (max-width: 850px) {
+	#display {
+		flex-direction: column;
+	}
+}
+
+@media (max-width: 600px) {
+	#footer {
+		justify-content: space-evenly;
+	}
+	#footer #buttons {
+		flex-direction: column;
+	}
 }
