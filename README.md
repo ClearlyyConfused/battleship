@@ -9,7 +9,7 @@ Website that allows user to play the game "battleship" against CPU. User can pla
 
 ## Deployment 🚀
 
-https://clearlyyconfused.github.io/battleship/
+https://louisdoan9.github.io/battleship/
 
 ## Screenshots 📸
 
