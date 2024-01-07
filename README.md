@@ -13,5 +13,5 @@ https://louisdoan9.github.io/battleship/
 
 ## Screenshots 📸
 
-![App Screenshot 1](./README_images/Screenshot%202023-07-26%20174307.png)
-![App Screenshot 2](./README_images/Screenshot%202023-07-26%20174424.png)
+![App Screenshot 1](./README_images/battleship.png)
+![App Screenshot 2](./README_images/battleship2.png)
